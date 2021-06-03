@@ -61,31 +61,67 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON SUCCESS: use the data to create dogCards and append them to the entry point
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
-axios.get('https://dog.ceo/api/breed/australian/images/random/5')
-  .then(response => {
-    const dogComponentsArray = response.data.message.map(dogPic => {
-      return dogCardMaker({ imageURL: dogPic, breed: 'Australian' })
-    })
-
-    dogComponentsArray.forEach(dogComp => {
-      entryPoint.appendChild(dogComp)
-    })
-  })
-  .catch(error => {
-    console.log(error)
-  })
-  .finally(() => {
-    console.log('done')
-  })
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
 
+function getDogs(breed, count) {
+  axios.get(`https://dog.ceo/api/breed/${breed}/images/random/${count}`)
+    .then(response => {
+      // const dogComponentsArray = response.data.message.map(dogPic => {
+      //   return dogCardMaker({ imageURL: dogPic, breed: 'Australian' })
+      // })
+
+      // dogComponentsArray.forEach(dogComp => {
+      //   entryPoint.appendChild(dogComp)
+      // })
+      response.data.message.forEach(dogPic => {
+        const dogComp = dogCardMaker({ imageURL: dogPic, breed })
+        entryPoint.appendChild(dogComp)
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    .finally(() => {
+      console.log('done')
+    })
+}
+
 
 // 👉 (OPTIONAL) TASK 7- Put a button in index.html to 'get dogs' and add a click
 // event listener that executes `getDogs`
+const button = document.querySelector('button')
+button.addEventListener('click', () => {
+  getDogs('chow', 3)
+  getDogs('mexicanhairless', 4)
+})
 
 
 // 👉 (OPTIONAL) TASK 8- Import the breeds from `breeds.js`
 // or request them from https://lambda-times-api.herokuapp.com/breeds
 // and loop over them, fetching a dog at each iteration
+
+
+axios.get('https://lambda-times-api.herokuapp.com/breeds')
+  .then(response => {
+    response.data.forEach(breed => {
+      getDogs(breed, 3)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+// fetch('https://lambda-times-api.herokuapp.com/breeds')
+//   .then(response => {
+//     return response.json()
+//   })
+//   .then(actualRes => {
+//     actualRes.forEach(breed => {
+//       getDogs(breed, 3)
+//     })
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
