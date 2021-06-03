@@ -46,11 +46,11 @@ function dogCardMaker({ imageURL, breed }) {
 }
 
 
-entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
-entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
-entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
-entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
-entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+// entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+// entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+// entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+// entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+// entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
 
 // 👉 TASK 4- Bring the Axios library into the project using one of two methods:
 //    * Traditional way: put another script tag inside index.html (`https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js`)
@@ -63,7 +63,13 @@ entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/po
 //    * IN ANY CASE: log "done" to the console
 axios.get('https://dog.ceo/api/breed/australian/images/random/5')
   .then(response => {
-    console.log(response)
+    const dogComponentsArray = response.data.message.map(dogPic => {
+      return dogCardMaker({ imageURL: dogPic, breed: 'Australian' })
+    })
+
+    dogComponentsArray.forEach(dogComp => {
+      entryPoint.appendChild(dogComp)
+    })
   })
   .catch(error => {
     console.log(error)
