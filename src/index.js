@@ -1,6 +1,6 @@
 // Imports at the top of the file!
 // We never nest imports inside blocks of code!
-
+import axios from 'axios'
 
 // 👉 TASK 1- Test out the following endpoints:
 
@@ -19,7 +19,7 @@
 
 // 👉 TASK 2- Select the "entry point", the element
 // inside of which we'll inject our dog cards 
-const entryPoint = null
+const entryPoint = document.querySelector('.entry')
 
 
 // 👉 TASK 3- `dogCardMaker` takes an object and returns a Dog Card.
@@ -46,6 +46,12 @@ function dogCardMaker({ imageURL, breed }) {
 }
 
 
+entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+entryPoint.appendChild(dogCardMaker({imageURL: 'https://images.dog.ceo/breeds/pointer-german/n02100236_2542.jpg', breed: 'Pitbull'}))
+
 // 👉 TASK 4- Bring the Axios library into the project using one of two methods:
 //    * Traditional way: put another script tag inside index.html (`https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js`)
 //    * Proyects with npm: install it with npm and import it into this file
@@ -55,7 +61,16 @@ function dogCardMaker({ imageURL, breed }) {
 //    * ON SUCCESS: use the data to create dogCards and append them to the entry point
 //    * ON FAILURE: log the error to the console
 //    * IN ANY CASE: log "done" to the console
-
+axios.get('https://dog.ceo/api/breed/australian/images/random/5')
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+  .finally(() => {
+    console.log('done')
+  })
 
 // 👉 (OPTIONAL) TASK 6- Wrap the fetching operation inside a function `getDogs`
 // that takes a breed and a count (of dogs)
