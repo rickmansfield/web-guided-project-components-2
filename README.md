@@ -12,4 +12,9 @@ number if `1234` is being used by another application.
 - Navigate into the project folder.
 - Run `npm install` to download the project's dependencies.
 - Run `npm start` to compile the project and spin up a dev server on `localhost`.
- test push
+
+## Gabriels You Tube Web Guided video & Notes
+
+- [Components II Video](https://youtu.be/DgrJ6bcyqDI) 
+
+![AXIOS IMAGE](Images\U2W1M4-Gab-Guided.JPG)
