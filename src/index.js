@@ -1,5 +1,31 @@
 import axios from 'axios';
 console.log(axios);
+//Non idomatic way
+// const result = axios.get('https://lambda-times-api.herokuapp.com/friends');
+// // console.log(result);// the data is not here
+// console.log('1 About to fetch data with Axios');
+
+// result.then(furtureData => {
+//   //freedom to assume the data is here
+//   //future code, for when the data actually arives
+//   console.log('3 Here is the future data', furtureData);
+// });
+
+//Idomatic way
+// console.log(result);// the data is not here
+console.log('1 About to fetch data with Axios');
+
+axios.get('https://lambda-times-api.herokuapp.com/friends')
+.then(furtureData => {
+  //freedom to assume the data is here
+  //future code, for when the data actually arives
+  console.log('3 Here is the future data', furtureData);
+});
+
+
+console.log('2 We requested data with axios');
+
+//The above lines of code are proof that JavaScript doesn't wait on #3 to come back. It passed thru #3 and went to #2 while waiting for #3 to finally finish it's computation. Remember... a PROMISE is an object that represents the RESULT of a computation. 
 
 // Imports at the top of the file!
 // We never nest imports inside blocks of code!
